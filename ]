@@ -42,43 +42,18 @@ cmp.setup({
 
 -- Highlight entire line for errors
 -- Highlight the line number for warnings
-local config = {
-    virtual_text = true,
-    signs = {
-        active = signs, -- Here I am calling the signs
-    },
+vim.diagnostic.config({
+   
+   virtual_text = true,
 
-    update_in_insert = true,
-    underline = true,
-    severity_sort = true,
+    signs = [
+        { 
+            text = { 
+                [vim.diagnostic.severity.ERROR] = '/!\\'
+            } 
+        }
 
-    float = {
-        focusable = true,
-        style = "minimal",
-        border = "rounded",
-        source = "always",
-        header = "",
-        prefix = "",
-    },
-}
+    ]
 
--- Remove existing autocommand
-vim.api.nvim_create_augroup("float_diagnostic", { clear = true })
-
--- Set the update time for diagnostics (no change here)
-vim.o.updatetime = 250
-
--- Define the keybinding to open the diagnostic float window
-vim.keymap.set('n', '<leader>pe', function()
-        vim.diagnostic.open_float(nil, { 
-            focus = false
-        })
-    end, 
-    { 
-        noremap = true,
-        silent = true,
-    }
-)
-
-vim.diagnostic.config(config)
+})
 

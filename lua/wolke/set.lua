@@ -15,3 +15,6 @@ set.hlsearch = false
 set.incsearch = true
 
 set.updatetime = 50
+
+set.mouse = ""
+
