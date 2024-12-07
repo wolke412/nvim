@@ -1,5 +1,5 @@
 return {
-	"wolke/tokyonight.nvim",
+	"https://github.com/folke/tokyonight.nvim",
   	lazy = false,
  	priority = 1000,
 
