@@ -68,6 +68,7 @@ vim.api.nvim_create_augroup("float_diagnostic", { clear = true })
 -- Set the update time for diagnostics (no change here)
 vim.o.updatetime = 250
 
+
 -- Define the keybinding to open the diagnostic float window
 vim.keymap.set('n', '<leader>pe', function()
         vim.diagnostic.open_float(nil, { 
@@ -82,3 +83,8 @@ vim.keymap.set('n', '<leader>pe', function()
 
 vim.diagnostic.config(config)
 
+-- Popup for floating diagnostics
+ vim.keymap.set('n', '<leader>pd', function()
+        vim.diagnostic.open_float(nil, { scope = "line" })
+    end, 
+    { desc = "Show diagnostics in a floating window" })
