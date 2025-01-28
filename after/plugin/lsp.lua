@@ -45,7 +45,7 @@ cmp.setup({
 local config = {
     virtual_text = true,
     signs = {
-        active = signs, -- Here I am calling the signs
+        active = signs, 
     },
 
     update_in_insert = true,
@@ -63,7 +63,7 @@ local config = {
 }
 
 -- Remove existing autocommand
-vim.api.nvim_create_augroup("float_diagnostic", { clear = true })
+-- vim.api.nvim_create_augroup("float_diagnostic", { clear = true })
 
 -- Set the update time for diagnostics (no change here)
 vim.o.updatetime = 250
@@ -81,10 +81,10 @@ vim.keymap.set('n', '<leader>pe', function()
     }
 )
 
+-- Bind <leader>d to open the Telescope diagnostics window
+vim.keymap.set("n", "<leader>pd", "<cmd>Telescope diagnostics<CR>", { 
+    desc = "Open diagnostics with Telescope" 
+})
+
 vim.diagnostic.config(config)
 
--- Popup for floating diagnostics
- vim.keymap.set('n', '<leader>pd', function()
-        vim.diagnostic.open_float(nil, { scope = "line" })
-    end, 
-    { desc = "Show diagnostics in a floating window" })
