@@ -14,6 +14,15 @@ require('mason-lspconfig').setup({
   },
 })
 
+-- Set up clangd LSP
+require('lspconfig').clangd.setup {
+  cmd = {
+    "clangd", 
+    "-I", "include/",  -- Custom include directory
+  },
+  filetypes = { "c", "cpp", "objc", "objcpp" },
+  -- You can configure other options here if needed
+}
 
 local cmp = require('cmp')
 local cmp_action = require('lsp-zero').cmp_action()
