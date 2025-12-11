@@ -11,3 +11,14 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 
+-- Enable system clipboard support
+vim.opt.clipboard:append("unnamedplus")
+vim.api.nvim_set_keymap('v', '<leader>y', '"+y', { 
+    noremap = true, silent = true 
+})
+
+vim.api.nvim_set_keymap('v', '<leader>y', '"+y', { 
+    noremap = true, silent = true 
+})
+
+

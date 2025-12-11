@@ -14,15 +14,6 @@ require('mason-lspconfig').setup({
   },
 })
 
--- Set up clangd LSP
-require('lspconfig').clangd.setup {
-  cmd = {
-    "clangd", 
-    "-I", "include/",  -- Custom include directory
-  },
-  filetypes = { "c", "cpp", "objc", "objcpp" },
-  -- You can configure other options here if needed
-}
 
 local cmp = require('cmp')
 local cmp_action = require('lsp-zero').cmp_action()
@@ -94,6 +85,27 @@ vim.keymap.set('n', '<leader>pe', function()
 vim.keymap.set("n", "<leader>pd", "<cmd>Telescope diagnostics<CR>", { 
     desc = "Open diagnostics with Telescope" 
 })
+
+
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if not client then return end
+
+        -- @diagnostic disable-next-line: missing-parameter
+        if client.supports_method('textDocument/formatting') then
+            vim.api.nvim_create_autocmd('BufWritePre', {
+                buffer = args.buf,
+                callback=function(args)
+                    vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
+                end
+            })
+        end
+    end
+})
+
+
+
 
 vim.diagnostic.config(config)
 
